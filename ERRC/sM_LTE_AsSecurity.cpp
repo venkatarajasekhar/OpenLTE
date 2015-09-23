@@ -68,8 +68,11 @@ void sM_LTE_AsSecurity::start(void)
   ->securityAlgorithmConfig()->integrityProtAlgorithm()->set(integrityProtAlgorithm);
 
   GCO_DUMP(sendpdu.pdu);
-
+  try{
   _CrrcAsp* pCrrcAsp = NEW_ASP_WITH_DL_DCCH_RRC_PDU (sendpdu);
+  }catch(...){
+    
+  }
   pCrrcAsp->Choice()->CrrcDlDcchMessageReq()->SupervisionDuration()->set(WAIT_SMC_COMP);
 
   OUTPUT ( SAP_LTE_NET_CRRC, pCrrcAsp );
